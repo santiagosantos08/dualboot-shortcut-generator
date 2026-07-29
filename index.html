@@ -466,9 +466,13 @@
     </div>
 
     <h1>Dual-Boot Reboot Script Generator</h1>
-
     <div class="section" style="border-left: 4px solid #f92672;">
-        <strong>IMPORTANT NOTICE:</strong> Generating or downloading these files is only part of the process. Setting up working desktop shortcuts, admin permissions, and shortcut parameters still requires manual configuration on both OS sides. Full step-by-step instructions are provided at the bottom of this page. Please read through the whole site once before doing anything! it's not too hard or convolouted, don't worry, just make sure you understand it before doing anything (not like you can break anything, dont worry, just don't wanna waste your time if this is not what you are looking for)
+        <strong>What's this site about? -></strong> A way to make shortcuts that easily reboot from one OS to another when dual booting Windows and Linux. This skips waiting for Grub to show up (it's bootloader agnostic), also skips spamming f12. Works -only- for UEFI systems + works with secure boot (supported, not required).
+        <br>It allows you to keep kernel-level anticheat like Riot Vanguard happy, because even if you were happy waiting for grub to select your OS, you might have discovered that Vanguard gets tripped if you chainload Windows after Grub.
+        <br><a href="https://www.reddit.com/r/linux_gaming/comments/1v62271/shortcuts_to_make_dual_booting_suck_a_little_bit/" target="_blank">Video demo and the post that originated this site</a>
+    </div>
+    <div class="section" style="border-left: 4px solid #f92672;">
+        <strong>IMPORTANT NOTICE:</strong> Generating or downloading these files is only part of the process. Full step-by-step instructions are provided at the bottom of this page. Please read through the whole site once before doing anything! it's not too hard or convoluted, don't worry, just make sure you understand it before doing anything.
     </div>
     <div class="section" style="border-left: 4px solid #f92672;">
         <strong>Mandatory "ENgLiSh NoT mY FirST LanGuAgE" dislcaimer:</strong> Reboot = Restart; Folder = Directory
@@ -593,6 +597,10 @@
                 <button type="button" onclick="downloadImage('win11.png', 'win11.png')">Download win11.png</button>
             </li>
         </ul>
+    </div>
+    <div class="section" style="border-left: 4px solid #f92672;">
+        <strong>Questions? ideas? anything? open an issue</strong>
+        <br><a href="https://github.com/santiagosantos08/dualboot-shortcut-generator" target="_blank">Github repo</a>
     </div>
 </div>
 
