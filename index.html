@@ -468,29 +468,30 @@
     <h1>Dual-Boot Reboot Script Generator</h1>
 
     <div class="section" style="border-left: 4px solid #f92672;">
-        <strong>IMPORTANT NOTICE:</strong> Generating or downloading these files is only part of the process. Setting up working desktop shortcuts, admin permissions, and shortcut parameters still requires manual configuration on both OS sides. Full step-by-step instructions are provided at the bottom of this page.
+        <strong>IMPORTANT NOTICE:</strong> Generating or downloading these files is only part of the process. Setting up working desktop shortcuts, admin permissions, and shortcut parameters still requires manual configuration on both OS sides. Full step-by-step instructions are provided at the bottom of this page. Please read through the whole site once before doing anything! it's not too hard or convolouted, don't worry, just make sure you understand it before doing anything (not like you can break anything, dont worry, just don't wanna waste your time if this is not what you are looking for)
     </div>
     <div class="section" style="border-left: 4px solid #f92672;">
-        <strong>Regarding the 'Sticky' modes:</strong> when using 'Sticky Linux' or 'Sticky Windows' the pc will *always* go to that one, so if you decide to go with Sticky Linux and Windows needs to update and reboot, it will go to Linux in the middle of that, meaning you'll have to restart and enter the bios/boot menu. If you don't like that behaviour stick -pun intended- with Sticky last used (or bios default, it will always go to that one)
+        <strong>Mandatory "ENgLiSh NoT mY FirST LanGuAgE" dislcaimer:</strong> Reboot = Restart; Folder = Directory
     </div>
     <div class="section">
         <h2>1. Boot Behavior Mode</h2>
+        <h4>Regular restart refers to rebooting from the OS menu instead of using the shortcut, also automatic restarts due to updates or required by installing software.</h4>
         <div class="radio-group">
             <label class="radio-option">
                 <input type="radio" name="behavior" value="sticky-linux" onchange="generate()">
-                Sticky Linux - (READ NOTE ON TOP) Cold boot always defaults to Linux, disregarding previous BIOS settings.
+                Sticky Linux - Cold boot always defaults to Linux, regular restart from Windows also goes to Linux.
             </label>
             <label class="radio-option">
                 <input type="radio" name="behavior" value="sticky-windows" onchange="generate()">
-                Sticky Windows - (READ NOTE ON TOP) Cold boot always defaults to Windows, disregarding previous BIOS settings.
+                Sticky Windows - Cold boot always defaults to Windows, regular restart from Linux also goes to Windows.
             </label>
             <label class="radio-option">
                 <input type="radio" name="behavior" value="sticky-last" checked onchange="generate()">
-                Sticky Last Used - (RECOMMENDED 1) Cold boot starts last booted OS.
+                Sticky Last Used - Cold boot starts last booted OS, regular restart goes back to your current OS.
             </label>
             <label class="radio-option">
                 <input type="radio" name="behavior" value="bios-default" onchange="generate()">
-                Keep BIOS Default - (RECOMMENDED 2) Cold boot respects BIOS default setting.
+                Keep BIOS Default - Cold boot respects BIOS default setting, regular restart goes to the default.
             </label>
         </div>
     </div>
@@ -542,7 +543,7 @@
 
         <h3>Windows Setup:</h3>
         <ol>
-            <li>Save the generated PowerShell code into a file named <code>linux_reboot.ps1</code> in a permanent folder.</li>
+            <li>Save the generated PowerShell code into a file named <code>linux_reboot.ps1</code> in a permanent folder (somewhere you won't accidetally delete).</li>
             <li>Place your chosen <code>.ico</code> image file in the same folder.</li>
             <li>Right-click <code>linux_reboot.ps1</code> and select <strong>Send to -&gt; Desktop (create shortcut)</strong>.</li>
             <li>Right-click the new shortcut on your Desktop and open <strong>Properties</strong>.</li>
