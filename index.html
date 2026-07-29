@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual-Boot Reboot Script Generator</title>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        padding: 20px;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       THEME 1: WIN32 CLASSIC (DEFAULT)
+       ========================================================================== */
+    body.theme-win32 {
+        background-color: #008080;
+        color: #000000;
+        font-family: "Tahoma", "MS Sans Serif", sans-serif;
+        font-size: 12px;
+    }
+    body.theme-win32 .container {
+        max-width: 850px;
+        margin: 0 auto;
+        background-color: #c0c0c0;
+        border: 2px solid;
+        border-color: #ffffff #808080 #808080 #ffffff;
+        padding: 10px;
+        box-shadow: 2px 2px 0px #000000;
+    }
+    body.theme-win32 h1 {
+        background-color: #000080;
+        color: #ffffff;
+        margin: -10px -10px 15px -10px;
+        padding: 6px 10px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    body.theme-win32 h2 {
+        font-size: 12px;
+        font-weight: bold;
+        color: #000000;
+        border-bottom: 1px solid #808080;
+        padding-bottom: 2px;
+        margin-top: 0;
+    }
+    body.theme-win32 .section {
+        background-color: #c0c0c0;
+        border: 2px solid;
+        border-color: #808080 #ffffff #ffffff #808080;
+        padding: 10px;
+        margin-bottom: 12px;
+    }
+    body.theme-win32 label {
+        display: block;
+        margin-top: 8px;
+        font-weight: bold;
+    }
+    body.theme-win32 input[type="text"], body.theme-win32 select {
+        width: 100%;
+        padding: 4px;
+        margin-top: 3px;
+        background-color: #ffffff;
+        border: 2px solid;
+        border-color: #808080 #ffffff #ffffff #808080;
+        color: #000000;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+    }
+    body.theme-win32 .radio-group {
+        margin-top: 5px;
+    }
+    body.theme-win32 .radio-option {
+        display: block;
+        margin-bottom: 4px;
+    }
+    body.theme-win32 textarea {
+        width: 100%;
+        height: 160px;
+        background-color: #ffffff;
+        color: #000000;
+        border: 2px solid;
+        border-color: #808080 #ffffff #ffffff #808080;
+        padding: 6px;
+        font-family: "Courier New", monospace;
+        resize: vertical;
+        margin-top: 4px;
+        font-size: 12px;
+    }
+    body.theme-win32 button {
+        background-color: #c0c0c0;
+        color: #000000;
+        border: 2px solid;
+        border-color: #ffffff #808080 #808080 #ffffff;
+        padding: 4px 12px;
+        cursor: pointer;
+        margin-top: 6px;
+        font-weight: bold;
+        font-size: 12px;
+    }
+    body.theme-win32 button:active {
+        border-color: #808080 #ffffff #ffffff #808080;
+        padding: 5px 11px 3px 13px;
+    }
+    body.theme-win32 .info-text {
+        color: #404040;
+        font-size: 11px;
+    }
+    body.theme-win32 ol, body.theme-win32 ul {
+        padding-left: 20px;
+    }
+    body.theme-win32 li {
+        margin-bottom: 4px;
+    }
+    body.theme-win32 code {
+        background-color: #ffffff;
+        color: #000000;
+        padding: 1px 4px;
+        border: 1px solid #808080;
+        font-family: "Courier New", monospace;
+    }
+
+    /* ==========================================================================
+       THEME 2: CRT TERMINAL
+       ========================================================================== */
+    body.theme-crt {
+        background-color: #050b05;
+        color: #00ff66;
+        font-family: "Courier New", Courier, monospace;
+        text-transform: uppercase;
+        text-shadow: 0 0 4px rgba(0, 255, 102, 0.6);
+    }
+    body.theme-crt::before {
+        content: " ";
+        display: block;
+        position: fixed;
+        top: 0; left: 0; bottom: 0; right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+        background-size: 100% 4px;
+        z-index: 100;
+        pointer-events: none;
+    }
+    body.theme-crt .container {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+    body.theme-crt h1 {
+        font-size: 1.4em;
+        color: #00ff66;
+        border: 2px dashed #00ff66;
+        padding: 10px;
+        text-align: center;
+        margin-top: 0;
+    }
+    body.theme-crt h2 {
+        font-size: 1.1em;
+        color: #00ff66;
+        border-bottom: 1px solid #00ff66;
+        padding-bottom: 5px;
+        margin-top: 0;
+    }
+    body.theme-crt .section {
+        background-color: #0a150a;
+        border: 2px solid #00ff66;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+    }
+    body.theme-crt label {
+        display: block;
+        margin-top: 12px;
+        color: #33ff88;
+    }
+    body.theme-crt input[type="text"], body.theme-crt select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        background-color: #000000;
+        border: 1px solid #00ff66;
+        color: #00ff66;
+        font-family: "Courier New", Courier, monospace;
+        text-transform: uppercase;
+        outline: none;
+    }
+    body.theme-crt input[type="text"]:focus, body.theme-crt select:focus {
+        box-shadow: 0 0 8px #00ff66;
+    }
+    body.theme-crt .radio-group {
+        margin-top: 8px;
+    }
+    body.theme-crt .radio-option {
+        display: block;
+        padding: 4px;
+        margin-bottom: 4px;
+        border: 1px dotted #008833;
+        color: #00ff66;
+    }
+    body.theme-crt textarea {
+        width: 100%;
+        height: 160px;
+        background-color: #000000;
+        color: #00ff66;
+        border: 1px solid #00ff66;
+        padding: 8px;
+        font-family: "Courier New", Courier, monospace;
+        resize: vertical;
+        margin-top: 5px;
+        text-transform: none;
+    }
+    body.theme-crt button {
+        background-color: #00ff66;
+        color: #000000;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        margin-top: 6px;
+        font-family: "Courier New", Courier, monospace;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    body.theme-crt button:hover {
+        background-color: #ffffff;
+        box-shadow: 0 0 10px #ffffff;
+    }
+    body.theme-crt .info-text {
+        color: #008833;
+        font-size: 0.85em;
+    }
+    body.theme-crt ol, body.theme-crt ul {
+        padding-left: 20px;
+        color: #00ff66;
+    }
+    body.theme-crt li {
+        margin-bottom: 6px;
+    }
+    body.theme-crt code {
+        background-color: #000000;
+        color: #00ff66;
+        padding: 2px 5px;
+        border: 1px solid #00ff66;
+        text-transform: none;
+    }
+
+    /* ==========================================================================
+       THEME 3: GRUVBOX LIGHT
+       ========================================================================== */
+    body.theme-gruvbox {
+        background-color: #fbf1c7;
+        color: #3c3836;
+        font-family: monospace, "Courier New", Courier;
+        font-size: 13px;
+    }
+    body.theme-gruvbox .container {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+    body.theme-gruvbox h1 {
+        color: #076678;
+        border-bottom: 2px solid #d5c4a1;
+        padding-bottom: 5px;
+        margin-top: 0;
+    }
+    body.theme-gruvbox h2 {
+        color: #076678;
+        border-bottom: 1px solid #d5c4a1;
+        padding-bottom: 4px;
+        margin-top: 0;
+    }
+    body.theme-gruvbox .section {
+        background-color: #f2e5bc;
+        border: 1px solid #d5c4a1;
+        padding: 15px;
+        margin-bottom: 18px;
+    }
+    body.theme-gruvbox label {
+        display: block;
+        margin-top: 10px;
+        color: #427b58;
+        font-weight: bold;
+    }
+    body.theme-gruvbox input[type="text"], body.theme-gruvbox select {
+        width: 100%;
+        padding: 6px;
+        margin-top: 4px;
+        background-color: #fbf1c7;
+        border: 1px solid #bdae93;
+        color: #3c3836;
+        font-family: monospace;
+    }
+    body.theme-gruvbox .radio-group {
+        margin-top: 6px;
+    }
+    body.theme-gruvbox .radio-option {
+        display: block;
+        margin-bottom: 5px;
+        color: #b57614;
+    }
+    body.theme-gruvbox textarea {
+        width: 100%;
+        height: 160px;
+        background-color: #fbf1c7;
+        color: #af3a03;
+        border: 1px solid #bdae93;
+        padding: 8px;
+        font-family: monospace;
+        resize: vertical;
+        margin-top: 4px;
+    }
+    body.theme-gruvbox button {
+        background-color: #af3a03;
+        color: #fbf1c7;
+        border: none;
+        padding: 6px 14px;
+        cursor: pointer;
+        margin-top: 6px;
+        font-family: monospace;
+        font-weight: bold;
+    }
+    body.theme-gruvbox button:hover {
+        background-color: #076678;
+    }
+    body.theme-gruvbox .info-text {
+        color: #7c6f64;
+        font-size: 0.9em;
+    }
+    body.theme-gruvbox ol, body.theme-gruvbox ul {
+        padding-left: 20px;
+    }
+    body.theme-gruvbox li {
+        margin-bottom: 6px;
+    }
+    body.theme-gruvbox code {
+        background-color: #ebdbb2;
+        color: #8f3f71;
+        padding: 2px 5px;
+        border: 1px solid #d5c4a1;
+    }
+
+    /* ==========================================================================
+       THEME 4: MONOKAI DARK
+       ========================================================================== */
+    body.theme-monokai {
+        background-color: #121212;
+        color: #f8f8f2;
+        font-family: monospace, "Courier New", Courier;
+        font-size: 13px;
+    }
+    body.theme-monokai .container {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+    body.theme-monokai h1 {
+        color: #a6e22e;
+        border-bottom: 2px solid #333333;
+        padding-bottom: 5px;
+        margin-top: 0;
+    }
+    body.theme-monokai h2 {
+        color: #a6e22e;
+        border-bottom: 1px solid #333333;
+        padding-bottom: 4px;
+        margin-top: 0;
+    }
+    body.theme-monokai .section {
+        background-color: #1e1e1e;
+        border: 1px solid #333333;
+        padding: 15px;
+        margin-bottom: 18px;
+    }
+    body.theme-monokai label {
+        display: block;
+        margin-top: 10px;
+        color: #66d9ef;
+        font-weight: bold;
+    }
+    body.theme-monokai input[type="text"], body.theme-monokai select {
+        width: 100%;
+        padding: 6px;
+        margin-top: 4px;
+        background-color: #121212;
+        border: 1px solid #66d9ef;
+        color: #f8f8f2;
+        font-family: monospace;
+    }
+    body.theme-monokai .radio-group {
+        margin-top: 6px;
+    }
+    body.theme-monokai .radio-option {
+        display: block;
+        margin-bottom: 5px;
+        color: #e6db74;
+    }
+    body.theme-monokai textarea {
+        width: 100%;
+        height: 160px;
+        background-color: #121212;
+        color: #fd971f;
+        border: 1px solid #444444;
+        padding: 8px;
+        font-family: monospace;
+        resize: vertical;
+        margin-top: 4px;
+    }
+    body.theme-monokai button {
+        background-color: #f92672;
+        color: #ffffff;
+        border: none;
+        padding: 6px 14px;
+        cursor: pointer;
+        margin-top: 6px;
+        font-family: monospace;
+        font-weight: bold;
+    }
+    body.theme-monokai button:hover {
+        background-color: #ff6699;
+    }
+    body.theme-monokai .info-text {
+        color: #888888;
+        font-size: 0.9em;
+    }
+    body.theme-monokai ol, body.theme-monokai ul {
+        padding-left: 20px;
+    }
+    body.theme-monokai li {
+        margin-bottom: 6px;
+    }
+    body.theme-monokai code {
+        background-color: #121212;
+        color: #ae81ff;
+        padding: 2px 5px;
+        border: 1px solid #444444;
+    }
+    </style>
+</head>
+<body class="theme-monokai">
+
+<div class="container">
+    <div class="section" style="margin-bottom: 15px;">
+        <label for="themeSelect" style="margin-top: 0;">UI Theme (this is just for this site it doesn't change anything about the scripts :p):</label>
+        <select id="themeSelect" onchange="switchTheme(this.value)">
+            <option value="theme-win32">Win32 Classic</option>
+            <option value="theme-crt">CRT Terminal</option>
+            <option value="theme-gruvbox">Gruvbox Light</option>
+            <option value="theme-monokai" selected>Monokai Dark</option>
+        </select>
+    </div>
+
+    <h1>Dual-Boot Reboot Script Generator</h1>
+
+    <div class="section">
+        <h2>1. Boot Behavior Mode</h2>
+        <div class="radio-group">
+            <label class="radio-option">
+                <input type="radio" name="behavior" value="sticky-linux" checked onchange="generate()">
+                Sticky Linux - Cold boot always defaults to Linux, disregarding previous BIOS settings.
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="behavior" value="sticky-windows" onchange="generate()">
+                Sticky Windows - Cold boot always defaults to Windows, disregarding previous BIOS settings.
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="behavior" value="sticky-last" onchange="generate()">
+                Sticky Last Used - Cold boot starts last booted OS.
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="behavior" value="bios-default" onchange="generate()">
+                Keep BIOS Default - Cold boot respects BIOS default setting.
+            </label>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. Target Parameters</h2>
+        <label for="distroName">Linux BCD Description Field:</label>
+        <input type="text" id="distroName" value="Fedora" oninput="generate()">
+        <span class="info-text">The exact description string from running "bcdedit /enum firmware" in Windows PowerShell (AS ADMIN!).</span>
+
+        <label for="desktopName">Linux Desktop Icon Title:</label>
+        <input type="text" id="desktopName" value="Reboot to Windows" oninput="generate()">
+
+        <label for="desktopComment">Linux Desktop Icon Comment:</label>
+        <input type="text" id="desktopComment" value="Reboot into Windows" oninput="generate()">
+
+        <label for="scriptPath">Absolute Path to windows_reboot.sh on Linux:</label>
+        <input type="text" id="scriptPath" value="/home/username/scripts/windows_reboot.sh" oninput="generate()">
+
+        <label for="iconPath">Absolute Path to Windows Icon (.png) on Linux:</label>
+        <input type="text" id="iconPath" value="/home/username/scripts/windows.png" oninput="generate()">
+    </div>
+
+    <div class="section">
+        <h2>3. Generated Scripts</h2>
+
+        <label>linux_reboot.ps1 (Windows side):</label>
+        <textarea id="outPs1" readonly></textarea>
+        <button onclick="copyToClipboard('outPs1')">Copy PowerShell Script</button>
+
+        <label>windows_reboot.sh (Linux side):</label>
+        <textarea id="outSh" readonly></textarea>
+        <button onclick="copyToClipboard('outSh')">Copy Bash Script</button>
+
+        <label>windows_reboot.desktop (~/.local/share/applications/):</label>
+        <textarea id="outDesktop" readonly></textarea>
+        <button onclick="copyToClipboard('outDesktop')">Copy Desktop Entry</button>
+    </div>
+
+    <div class="section">
+        <h2>4. Manual Setup Instructions</h2>
+
+        <h3>Windows Setup:</h3>
+        <ol>
+            <li>Save the generated PowerShell code into a file named <code>linux_reboot.ps1</code> in a permanent folder.</li>
+            <li>Place your chosen <code>.ico</code> image file in the same folder.</li>
+            <li>Right-click <code>linux_reboot.ps1</code> and select <strong>Send to -&gt; Desktop (create shortcut)</strong>.</li>
+            <li>Right-click the new shortcut on your Desktop and open <strong>Properties</strong>.</li>
+            <li>Change the <strong>Target</strong> field to:
+                <br>
+                <code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -ExecutionPolicy Bypass -File "C:\path\to\your\linux_reboot.ps1"</code>
+            </li>
+            <li>Click <strong>Advanced...</strong> and check the box for <strong>Run as administrator</strong>.</li>
+            <li>Click <strong>Change Icon...</strong> and browse to select your <code>.ico</code> file.</li>
+            <li>Move the shortcut to <code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</code> so it appears in your Start Menu.</li>
+        </ol>
+
+        <h3>Linux Setup:</h3>
+        <ol>
+            <li>Save the generated Bash code into a file named <code>windows_reboot.sh</code> at the absolute path specified in section 2.</li>
+            <li>Place your chosen <code>.png</code> icon at the absolute path specified in section 2.</li>
+            <li>Make the script executable by running:
+                <br>
+                <code>chmod +x /path/to/windows_reboot.sh</code>
+            </li>
+            <li>Save the desktop entry content into a file named <code>windows_reboot.desktop</code> in <code>~/.local/share/applications/</code></li>
+            <li>If the application icon does not show up immediately in your application menu, log out and log back in.</li>
+        </ol>
+    </div>
+</div>
+
+<script>
+function switchTheme(themeClass) {
+    document.body.className = themeClass;
+}
+
+function generate() {
+    const behavior = document.querySelector('input[name="behavior"]:checked').value;
+    const distro = document.getElementById('distroName').value.trim();
+    const desktopName = document.getElementById('desktopName').value.trim();
+    const desktopComment = document.getElementById('desktopComment').value.trim();
+    const scriptPath = document.getElementById('scriptPath').value.trim();
+    const iconPath = document.getElementById('iconPath').value.trim();
+
+    const psIsPermanent = (behavior === 'sticky-linux' || behavior === 'sticky-last');
+    const bashIsPermanent = (behavior === 'sticky-windows' || behavior === 'sticky-last');
+
+    let psActionBlock = "";
+    if (psIsPermanent) {
+        psActionBlock = `if ($linuxGuid) {
+    if ($linuxGuid -ne "{default}") {
+        bcdedit /default $linuxGuid
+    }
+    shutdown /r /t 0
+} else {
+    Write-Error "Linux entry '$targetDistro' not found in EFI boot manager. Aborting."
+    exit 1
+}`;
+    } else {
+        psActionBlock = `if ($linuxGuid) {
+    bcdedit /bootsequence $linuxGuid
+    shutdown /r /t 0
+} else {
+    Write-Error "Linux entry '$targetDistro' not found in EFI boot manager. Aborting."
+    exit 1
+}`;
+    }
+
+    const ps1Content = `$targetDistro = "${distro}"
+$bcdOutput = bcdedit /enum firmware
+$linuxGuid = $null
+$currentGuid = $null
+
+$escapedTarget = [regex]::Escape($targetDistro)
+
+foreach ($line in $bcdOutput) {
+    if ($line -match '^identifier\\s+({[a-f0-9-]+}|{default})') {
+        $currentGuid = $matches[1]
+    }
+    if ($line -match "description\\s+.*$escapedTarget") {
+        $linuxGuid = $currentGuid
+        break
+    }
+}
+
+${psActionBlock}`;
+
+    let bashActionCmd = "";
+    if (bashIsPermanent) {
+        bashActionCmd = `efibootmgr -o "$WIN_BOOT_NUM"`;
+    } else {
+        bashActionCmd = `efibootmgr -n "$WIN_BOOT_NUM"`;
+    }
+
+    const shContent = `#!/bin/bash
+
+WIN_BOOT_NUM=$(efibootmgr | grep -i "Windows Boot Manager" | grep -oP 'Boot\\K[0-9A-Fa-f]{4}')
+
+if [ -n "$WIN_BOOT_NUM" ]; then
+    ${bashActionCmd}
+    systemctl reboot
+else
+    echo "ERROR: Windows Boot Manager not found in efibootmgr output." >&2
+    exit 1
+fi`;
+
+    const desktopContent = `[Desktop Entry]
+Type=Application
+Name=${desktopName}
+Comment=${desktopComment}
+Exec=pkexec /bin/bash ${scriptPath}
+Icon=${iconPath}
+Terminal=false
+Categories=System;`;
+
+    document.getElementById('outPs1').value = ps1Content;
+    document.getElementById('outSh').value = shContent;
+    document.getElementById('outDesktop').value = desktopContent;
+}
+
+function copyToClipboard(id) {
+    const textarea = document.getElementById(id);
+    textarea.select();
+    document.execCommand('copy');
+}
+
+window.onload = generate;
+</script>
+
+</body>
+</html>
