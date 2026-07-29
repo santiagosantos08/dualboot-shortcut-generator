@@ -497,7 +497,7 @@
 
     <div class="section">
         <h2>2. Target Parameters</h2>
-        <label for="distroName">Linux BCD Description Field:</label>
+        <label for="distroName">Linux BCD Description Field: (Case sensitive!!!!)</label>
         <input type="text" id="distroName" value="Fedora" oninput="generate()">
         <span class="info-text">The exact description string from running "bcdedit /enum firmware" in Windows PowerShell (AS ADMIN!).</span>
 
@@ -506,12 +506,12 @@
 
         <label for="desktopComment">Linux Desktop Icon Comment:</label>
         <input type="text" id="desktopComment" value="Reboot into Windows" oninput="generate()">
-
         <label for="scriptPath">Absolute Path to windows_reboot.sh on Linux:</label>
-        <input type="text" id="scriptPath" value="/home/username/scripts/windows_reboot.sh" oninput="generate()">
-
+        <input type="text" id="scriptPath" value="/home/yourusername/scripts/winreboot/windows_reboot.sh" oninput="generate()">
         <label for="iconPath">Absolute Path to Windows Icon (.png) on Linux:</label>
-        <input type="text" id="iconPath" value="/home/username/scripts/windows.png" oninput="generate()">
+        <input type="text" id="iconPath" value="/home/yourusername/scripts/winreboot/win11.png" oninput="generate()">
+        <label for="scriptPath">(These paths can be whatever you like, just make sure you actually put the files in there afterwards..)</label>
+        <label for="scriptPath">Something like /home/yourusername/scripts/winreboot. Dont use ~ or $HOME or anything, do an absolute path from /</label>
     </div>
 
     <div class="section">
@@ -587,7 +587,7 @@
         <strong>For the Linux->Win shortcut:</strong>
         <ul>
             <li>
-                <strong>Windows PNG Icon Direct Download:</strong>
+                <strong>Windows PNG Icon Direct Download: (Rename according to what you set in the icon path if named different in there)</strong>
                 <br>
                 <button type="button" onclick="downloadImage('win11.png', 'win11.png')">Download win11.png</button>
             </li>
