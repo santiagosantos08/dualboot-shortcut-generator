@@ -124,6 +124,9 @@
         border: 1px solid #808080;
         font-family: "Courier New", monospace;
     }
+    body.theme-win32 a {
+        color: #000080;
+    }
 
     /* ==========================================================================
        THEME 2: CRT TERMINAL
@@ -246,6 +249,9 @@
         border: 1px solid #00ff66;
         text-transform: none;
     }
+    body.theme-crt a {
+        color: #00ff66;
+    }
 
     /* ==========================================================================
        THEME 3: GRUVBOX LIGHT
@@ -342,6 +348,9 @@
         padding: 2px 5px;
         border: 1px solid #d5c4a1;
     }
+    body.theme-gruvbox a {
+        color: #076678;
+    }
 
     /* ==========================================================================
        THEME 4: MONOKAI DARK
@@ -437,6 +446,9 @@
         color: #ae81ff;
         padding: 2px 5px;
         border: 1px solid #444444;
+    }
+    body.theme-monokai a {
+        color: #66d9ef;
     }
     </style>
 </head>
@@ -553,6 +565,32 @@
             <li>If the application icon does not show up immediately in your application menu, log out and log back in.</li>
         </ol>
     </div>
+
+    <div class="section">
+        <h2>5. Icon Resources & Tools</h2>
+        <strong>For the Win->Linux shortcut:</strong>
+        <ul>
+            <li>
+                <strong>Public Icon Repo:</strong> You can find clean vector/PNG logos for Linux distros at
+                <a href="https://simpleicons.org" target="_blank">simpleicons.org</a>.
+            </li>
+            <li>
+                <strong>Converting PNG to ICO on Linux:</strong> If ImageMagick is installed, you can convert any PNG into a multi-resolution ICO file using:
+                <br>
+                <code>magick convert input.png -define icon:auto-resize=256,128,64,48,32,16 output.ico</code>
+                <br>
+                <strong>Otherwise you can use any online converter, since that .ico is needed for the Win->Lin shortcut and you probably don't have ImageMagick on Windows..</strong>
+            </li>
+        </ul>
+        <strong>For the Linux->Win shortcut:</strong>
+        <ul>
+            <li>
+                <strong>Windows PNG Icon Direct Download:</strong>
+                <br>
+                <button type="button" onclick="downloadImage('win11.png', 'win11.png')">Download win11.png</button>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <script>
@@ -658,6 +696,19 @@ function downloadFile(id, filename) {
     link.download = filename;
     link.click();
     URL.revokeObjectURL(link.href);
+}
+
+function downloadImage(url, filename) {
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        })
+        .catch(err => console.error('Image download failed:', err));
 }
 
 window.onload = generate;
