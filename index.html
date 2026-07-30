@@ -467,16 +467,20 @@
 
     <h1>Dual-Boot Reboot Script Generator</h1>
     <div class="section" style="border-left: 4px solid #f92672;">
-        <strong>What's this site about? -></strong> A way to make shortcuts that easily reboot from one OS to another when dual booting Windows and Linux. This skips waiting for Grub to show up (it's bootloader agnostic), also skips spamming f12. Works -only- for UEFI systems + works with secure boot (supported, not required).
+        <strong>What's this site about? -&gt;</strong> A way to make shortcuts that easily reboot from one OS to another when dual booting Windows and Linux. This skips waiting for Grub to show up (it's bootloader agnostic), also skips spamming f12. Works -only- for UEFI systems + works with secure boot (supported, not required).
         <br>It allows you to keep kernel-level anticheat like Riot Vanguard happy, because even if you were happy waiting for grub to select your OS, you might have discovered that Vanguard gets tripped if you chainload Windows after Grub.
         <br><a href="https://www.reddit.com/r/linux_gaming/comments/1v62271/shortcuts_to_make_dual_booting_suck_a_little_bit/" target="_blank">Video demo and the post that originated this site</a>
     </div>
-    <div class="section" style="border-left: 4px solid #f92672;">
-        <strong>IMPORTANT NOTICE:</strong> Generating or downloading these files is only part of the process. Full step-by-step instructions are provided at the bottom of this page. Please read through the whole site once before doing anything! it's not too hard or convoluted, don't worry, just make sure you understand it before doing anything.
+
+    <div class="section">
+        <h2>0. Create Necessary Directories</h2>
+        <p>Before saving any scripts or icons, make sure to create the dedicated directories on both operating systems:</p>
+        <ul>
+            <li><strong>Linux:</strong> Create <code>~/scripts/winreboot</code> (<code>/home/YOUR_USERNAME/scripts/winreboot</code>).</li>
+            <li><strong>Windows:</strong> Create <code>C:\scripts\linuxreboot</code></li>
+        </ul>
     </div>
-    <div class="section" style="border-left: 4px solid #f92672;">
-        <strong>Mandatory "ENgLiSh NoT mY FirST LanGuAgE" dislcaimer:</strong> Reboot = Restart; Folder = Directory
-    </div>
+
     <div class="section">
         <h2>1. Boot Behavior Mode</h2>
         <h4>Regular restart refers to rebooting from the OS menu instead of using the shortcut, also automatic restarts due to updates or required by installing software.</h4>
@@ -526,41 +530,8 @@
     </div>
 
     <div class="section">
-        <h2>4. Manual Setup Instructions</h2>
-
-        <h3>Windows Setup:</h3>
-        <ol>
-            <li>Save the generated PowerShell code into a file named <code>linux_reboot.ps1</code> in a permanent folder (somewhere you won't accidetally delete).</li>
-            <li>Place your chosen <code>.ico</code> image file in the same folder.</li>
-            <li>Right-click <code>linux_reboot.ps1</code> and select <strong>Send to -&gt; Desktop (create shortcut)</strong>.</li>
-            <li>Right-click the new shortcut on your Desktop and open <strong>Properties</strong>.</li>
-            <li>Change the <strong>Target</strong> field to:
-                <br>
-                <code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -ExecutionPolicy Bypass -File "C:\path\to\your\linux_reboot.ps1"</code>
-            </li>
-            <li>Click <strong>Advanced...</strong> and check the box for <strong>Run as administrator</strong>.</li>
-            <li>Click <strong>Change Icon...</strong> and browse to select your <code>.ico</code> file.</li>
-            <li>Move the shortcut to <code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</code> so it appears in your Start Menu.</li>
-        </ol>
-
-        <h3>Linux Setup:</h3>
-        <ol>
-            <li>Create the folder <code>~/scripts/winreboot</code> if it doesn't exist yet, and put both <code>windows_reboot.sh</code> and your chosen <code>.png</code> icon (e.g. <code>win11.png</code>) in <code>~/scripts/winreboot</code>.
-                <br>
-                <span class="info-text">(You can change this folder if you want, just make sure to update the paths inside the generated <code>windows_reboot.desktop</code> file!)</span>
-            </li>
-            <li>Make the script executable by running:
-                <br>
-                <code>chmod +x ~/scripts/winreboot/windows_reboot.sh</code>
-            </li>
-            <li>Save the desktop entry content into a file named <code>windows_reboot.desktop</code> in <code>~/.local/share/applications/</code></li>
-            <li>If the application icon does not show up immediately in your application menu, log out and log back in.</li>
-        </ol>
-    </div>
-
-    <div class="section">
-        <h2>5. Icon Resources & Tools</h2>
-        <strong>For the Win->Linux shortcut:</strong>
+        <h2>4. Icon Resources & Tools</h2>
+        <strong>For the Win-&gt;Linux shortcut:</strong>
         <ul>
             <li>
                 <strong>Public Icon Repo:</strong> You can find clean vector/PNG logos for Linux distros at
@@ -571,10 +542,10 @@
                 <br>
                 <code>magick convert input.png -define icon:auto-resize=256,128,64,48,32,16 output.ico</code>
                 <br>
-                <strong>Otherwise you can use any online converter, since that .ico is needed for the Win->Lin shortcut and you probably don't have ImageMagick on Windows..</strong>
+                <strong>Otherwise you can use any online converter, since that .ico is needed for the Win-&gt;Lin shortcut and you probably don't have ImageMagick on Windows..</strong>
             </li>
         </ul>
-        <strong>For the Linux->Win shortcut:</strong>
+        <strong>For the Linux-&gt;Win shortcut:</strong>
         <ul>
             <li>
                 <strong>Windows PNG Icon Direct Download:</strong>
@@ -582,6 +553,42 @@
                 <button type="button" onclick="downloadImage('win11.png', 'win11.png')">Download win11.png</button>
             </li>
         </ul>
+    </div>
+
+    <div class="section">
+        <h2>5. Final Setup Instructions</h2>
+
+        <h3>Windows Setup:</h3>
+        <ol>
+            <li>Save the generated PowerShell file <code>linux_reboot.ps1</code> in <code>C:\scripts\linuxreboot</code></li>
+            <li>Place your chosen <code>.ico</code> image file in the same folder.</li>
+            <li>Right-click <code>linux_reboot.ps1</code> and select <strong>Send to -&gt; Desktop (create shortcut)</strong>.</li>
+            <li>Right-click the new shortcut on your Desktop and open <strong>Properties</strong>.</li>
+            <li>By default, the <strong>Target</strong> field will show:
+                <br>
+                <code>C:\scripts\linuxreboot\linux_reboot.ps1</code>
+                <br>
+                Change the <strong>Target</strong> field to:
+                <br>
+                <code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -ExecutionPolicy Bypass -File "C:\scripts\linuxreboot\linux_reboot.ps1"</code>
+            </li>
+            <li>Click <strong>Advanced...</strong> and check the box for <strong>Run as administrator</strong>.</li>
+            <li>Click <strong>Change Icon...</strong> and browse to select your <code>.ico</code> file.</li>
+            <li>Move the shortcut to <code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</code> so it appears in your Start Menu.</li>
+        </ol>
+
+        <h3>Linux Setup:</h3>
+        <ol>
+            <li>Save <code>windows_reboot.sh</code> and your chosen <code>.png</code> icon (e.g. <code>win11.png</code>) in <code>~/scripts/winreboot</code>.
+                <br>
+            </li>
+            <li>Make the script executable by running:
+                <br>
+                <code>chmod +x ~/scripts/winreboot/windows_reboot.sh</code>
+            </li>
+            <li>Save the desktop entry <code>windows_reboot.desktop</code> in <code>~/.local/share/applications/</code></li>
+            <li>If the application icon does not show up immediately in your application menu, log out and log back in.</li>
+        </ol>
     </div>
     <div class="section" style="border-left: 4px solid #f92672;">
         <strong>Questions? ideas? anything? open an issue</strong>
