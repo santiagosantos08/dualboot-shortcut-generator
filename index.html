@@ -500,11 +500,12 @@
     <div class="section">
         <h2>2. Target Parameters</h2>
         <label for="distroName">Linux BCD Description Field: (Case sensitive!!!!)</label>
-        <span class="info-text">On Windows, open PowerShell as admin, then run 'bcdedit /enum firmware' (without the quotes) and input JUST whatever is in the description field for your Linux entry (will be something like Fedora, Ubuntu, etc)</span>
+        <span class="info-text">On Windows, open PowerShell as admin, then run 'bcdedit /enum firmware' (without the quotes) and input JUST whatever is in the description field for your Linux entry (will be something like Fedora, Ubuntu, Grub, etc)</span>
         <input type="text" id="distroName" value="Fedora" oninput="generate()">
 
 
         <label for="linuxUsername">Linux username (case sensitive!!!)</label>
+        <span class="info-text">If you are not sure of this, open a terminal and run 'whoami' (without the quotes)</span>
         <input type="text" id="linuxUsername" value="yourusername" oninput="generate()">
     </div>
 
