@@ -512,21 +512,21 @@
     <div class="section">
         <h2>3. Generated Scripts</h2>
 
-        <label>linux_reboot.ps1 (Windows side):</label>
+        <label>linux_reboot.ps1 (Save on Windows <code>C:\scripts\linuxreboot\linux_reboot.ps1</code>):</label>
         <textarea id="outPs1" readonly></textarea>
         <button onclick="copyToClipboard('outPs1')">Copy PowerShell Script</button>
         <button onclick="downloadFile('outPs1', 'linux_reboot.ps1')">Download linux_reboot.ps1</button>
 
         <br><br>
 
-        <label>windows_reboot.sh (Linux side):</label>
+        <label>windows_reboot.sh (Save on Linux <code>~/scripts/winreboot/windows_reboot.sh</code>):</label>
         <textarea id="outSh" readonly></textarea>
         <button onclick="copyToClipboard('outSh')">Copy Bash Script</button>
         <button onclick="downloadFile('outSh', 'windows_reboot.sh')">Download windows_reboot.sh</button>
 
         <br><br>
 
-        <label>windows_reboot.desktop (~/.local/share/applications/):</label>
+        <label>windows_reboot.desktop (Save on Linux <code>~/.local/share/applications/windows_reboot.desktop</code>):</label>
         <textarea id="outDesktop" readonly></textarea>
         <button onclick="copyToClipboard('outDesktop')">Copy Desktop Entry</button>
         <button onclick="downloadFile('outDesktop', 'windows_reboot.desktop')">Download windows_reboot.desktop</button>
@@ -541,17 +541,17 @@
                 <a href="https://simpleicons.org" target="_blank">simpleicons.org</a>.
             </li>
             <li>
-                <strong>Converting PNG to ICO on Linux:</strong> If ImageMagick is installed, you can convert any PNG into a multi-resolution ICO file using:
+                <strong>Converting PNG to ICO:</strong> You can use any online converter.
+                <br>
+                <strong>Or, if you are prepping everything from the Linux side, you probably have ImageMagick installed, convert it with:</strong>
                 <br>
                 <code>magick convert input.png -define icon:auto-resize=256,128,64,48,32,16 output.ico</code>
-                <br>
-                <strong>Otherwise you can use any online converter, since that .ico is needed for the Win-&gt;Lin shortcut and you probably don't have ImageMagick on Windows..</strong>
             </li>
         </ul>
         <strong>For the Linux-&gt;Win shortcut:</strong>
         <ul>
             <li>
-                <strong>Windows PNG Icon Direct Download:</strong>
+                <strong>Windows PNG Icon Direct Download (Save on Linux <code>~/scripts/winreboot/win11.png</code>):</strong>
                 <br>
                 <button type="button" onclick="downloadImage('win11.png', 'win11.png')">Download win11.png</button>
             </li>
@@ -582,7 +582,7 @@
 
         <h3>Linux Setup:</h3>
         <ol>
-            <li>Save <code>windows_reboot.sh</code> and your chosen <code>.png</code> icon (e.g. <code>win11.png</code>) in <code>~/scripts/winreboot</code>.
+            <li>Save <code>windows_reboot.sh</code> and <code>win11.png</code> in <code>~/scripts/winreboot</code>.
                 <br>
                 <span class="info-text">Just like in the Windows->Linux one, the icon is optional, if you don't want one remove the 'Icon' line from the .desktop file</span>
             </li>
