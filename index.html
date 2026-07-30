@@ -482,14 +482,6 @@
         <h4>Regular restart refers to rebooting from the OS menu instead of using the shortcut, also automatic restarts due to updates or required by installing software.</h4>
         <div class="radio-group">
             <label class="radio-option">
-                <input type="radio" name="behavior" value="sticky-linux" onchange="generate()">
-                Sticky Linux - Cold boot always defaults to Linux, regular restart from Windows also goes to Linux.
-            </label>
-            <label class="radio-option">
-                <input type="radio" name="behavior" value="sticky-windows" onchange="generate()">
-                Sticky Windows - Cold boot always defaults to Windows, regular restart from Linux also goes to Windows.
-            </label>
-            <label class="radio-option">
                 <input type="radio" name="behavior" value="sticky-last" checked onchange="generate()">
                 Sticky Last Used - Cold boot starts last booted OS, regular restart goes back to your current OS.
             </label>
@@ -505,12 +497,6 @@
         <label for="distroName">Linux BCD Description Field: (Case sensitive!!!!)</label>
         <input type="text" id="distroName" value="Fedora" oninput="generate()">
         <span class="info-text">The exact description string from running "bcdedit /enum firmware" in Windows PowerShell (AS ADMIN!).</span>
-
-        <label for="desktopName">Linux->Win shortcut name:</label>
-        <input type="text" id="desktopName" value="Reboot to Windows" oninput="generate()">
-
-        <label for="desktopComment">Linux->Win shortcut description:</label>
-        <input type="text" id="desktopComment" value="Reboot into Windows" oninput="generate()">
 
         <label for="linuxUsername">Linux username (case sensitive!!!)</label>
         <input type="text" id="linuxUsername" value="yourusername" oninput="generate()">
@@ -611,14 +597,14 @@ function switchTheme(themeClass) {
 function generate() {
     const behavior = document.querySelector('input[name="behavior"]:checked').value;
     const distro = document.getElementById('distroName').value.trim();
-    const desktopName = document.getElementById('desktopName').value.trim();
-    const desktopComment = document.getElementById('desktopComment').value.trim();
+    const desktopName = "Reboot to Windows";
+    const desktopComment = "Reboot into Windows";
     const username = document.getElementById('linuxUsername').value.trim();
     const scriptPath = `/home/${username}/scripts/winreboot/windows_reboot.sh`;
     const iconPath = `/home/${username}/scripts/winreboot/win11.png`;
 
-    const psIsPermanent = (behavior === 'sticky-linux' || behavior === 'sticky-last');
-    const bashIsPermanent = (behavior === 'sticky-windows' || behavior === 'sticky-last');
+    const psIsPermanent = (behavior === 'sticky-last');
+    const bashIsPermanent = (behavior === 'sticky-last');
 
     let psActionBlock = "";
     if (psIsPermanent) {
