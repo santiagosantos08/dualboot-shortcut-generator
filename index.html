@@ -561,7 +561,7 @@
         <h3>Windows Setup:</h3>
         <ol>
             <li>Save the generated PowerShell file <code>linux_reboot.ps1</code> in <code>C:\scripts\linuxreboot</code></li>
-            <li>Place your chosen <code>.ico</code> image file in the same directory.</li>
+            <li>(optional) Place your chosen <code>.ico</code> image file in the same directory.</li>
             <li>Right-click <code>linux_reboot.ps1</code> and select <strong>Send to -&gt; Desktop (create shortcut)</strong>.</li>
             <li>Right-click the new shortcut on your Desktop and open <strong>Properties</strong>.</li>
             <li>By default, the <strong>Target</strong> field will show:
@@ -573,21 +573,22 @@
                 <code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -ExecutionPolicy Bypass -File "C:\scripts\linuxreboot\linux_reboot.ps1"</code>
             </li>
             <li>Click <strong>Advanced...</strong> and check the box for <strong>Run as administrator</strong>.</li>
-            <li>Click <strong>Change Icon...</strong> and browse to select your <code>.ico</code> file.</li>
-            <li>Move the shortcut to <code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</code> so it appears in your Start Menu.</li>
+            <li>(optional) Click <strong>Change Icon...</strong> and browse to select your <code>.ico</code> file.</li>
+            <li>(optional) Move the shortcut to <code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</code> so it appears in your Start Menu.</li>
         </ol>
 
         <h3>Linux Setup:</h3>
         <ol>
             <li>Save <code>windows_reboot.sh</code> and your chosen <code>.png</code> icon (e.g. <code>win11.png</code>) in <code>~/scripts/winreboot</code>.
                 <br>
+                <span class="info-text">Just like in the Windows->Linux one, the icon is optional, if you don't want one remove the 'Icon' line from the .desktop file</span>
             </li>
             <li>Make the script executable by running:
                 <br>
                 <code>chmod +x ~/scripts/winreboot/windows_reboot.sh</code>
             </li>
             <li>Save the desktop entry <code>windows_reboot.desktop</code> in <code>~/.local/share/applications/</code></li>
-            <li>If the application icon does not show up immediately in your application menu, log out and log back in.</li>
+            <li>(optional) If the application icon does not show up immediately in your application menu, log out and log back in.</li>
         </ol>
     </div>
     <div class="section" style="border-left: 4px solid #f92672;">
