@@ -511,12 +511,9 @@
 
         <label for="desktopComment">Linux->Win shortcut description:</label>
         <input type="text" id="desktopComment" value="Reboot into Windows" oninput="generate()">
-        <label for="scriptPath">Absolute Path to windows_reboot.sh on Linux:</label>
-        <input type="text" id="scriptPath" value="/home/yourusername/scripts/winreboot/windows_reboot.sh" oninput="generate()">
-        <label for="iconPath">Absolute Path to Windows Icon (.png) on Linux:</label>
-        <input type="text" id="iconPath" value="/home/yourusername/scripts/winreboot/win11.png" oninput="generate()">
-        <label for="scriptPath">(These paths can be whatever you like, just make sure you actually put the files in there afterwards..)</label>
-        <label for="scriptPath">Something like /home/yourusername/scripts/winreboot. Dont use ~ or $HOME or anything, do an absolute path from /</label>
+
+        <label for="linuxUsername">Linux username (case sensitive!!!)</label>
+        <input type="text" id="linuxUsername" value="yourusername" oninput="generate()">
     </div>
 
     <div class="section">
@@ -562,11 +559,13 @@
 
         <h3>Linux Setup:</h3>
         <ol>
-            <li>Save the generated Bash code into a file named <code>windows_reboot.sh</code> at the absolute path specified in section 2.</li>
-            <li>Place your chosen <code>.png</code> icon at the absolute path specified in section 2.</li>
+            <li>Create the folder <code>~/scripts/winreboot</code> if it doesn't exist yet, and put both <code>windows_reboot.sh</code> and your chosen <code>.png</code> icon (e.g. <code>win11.png</code>) in <code>~/scripts/winreboot</code>.
+                <br>
+                <span class="info-text">(You can change this folder if you want, just make sure to update the paths inside the generated <code>windows_reboot.desktop</code> file!)</span>
+            </li>
             <li>Make the script executable by running:
                 <br>
-                <code>chmod +x /path/to/windows_reboot.sh</code>
+                <code>chmod +x ~/scripts/winreboot/windows_reboot.sh</code>
             </li>
             <li>Save the desktop entry content into a file named <code>windows_reboot.desktop</code> in <code>~/.local/share/applications/</code></li>
             <li>If the application icon does not show up immediately in your application menu, log out and log back in.</li>
@@ -592,7 +591,7 @@
         <strong>For the Linux->Win shortcut:</strong>
         <ul>
             <li>
-                <strong>Windows PNG Icon Direct Download: (Rename according to what you set in the icon path if named different in there)</strong>
+                <strong>Windows PNG Icon Direct Download:</strong>
                 <br>
                 <button type="button" onclick="downloadImage('win11.png', 'win11.png')">Download win11.png</button>
             </li>
@@ -614,8 +613,9 @@ function generate() {
     const distro = document.getElementById('distroName').value.trim();
     const desktopName = document.getElementById('desktopName').value.trim();
     const desktopComment = document.getElementById('desktopComment').value.trim();
-    const scriptPath = document.getElementById('scriptPath').value.trim();
-    const iconPath = document.getElementById('iconPath').value.trim();
+    const username = document.getElementById('linuxUsername').value.trim();
+    const scriptPath = `/home/${username}/scripts/winreboot/windows_reboot.sh`;
+    const iconPath = `/home/${username}/scripts/winreboot/win11.png`;
 
     const psIsPermanent = (behavior === 'sticky-linux' || behavior === 'sticky-last');
     const bashIsPermanent = (behavior === 'sticky-windows' || behavior === 'sticky-last');
@@ -641,8 +641,8 @@ function generate() {
 }`;
     }
 
-    const ps1Content = `$targetDistro = "${distro}"
-$bcdOutput = bcdedit /enum firmware
+    const ps1Content = `$targetDistro = "${distro}".ToLower()
+$bcdOutput = (bcdedit /enum firmware).ToLower()
 $linuxGuid = $null
 $currentGuid = $null
 
