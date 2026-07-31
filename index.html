@@ -129,128 +129,103 @@
     }
 
     /* ==========================================================================
-       THEME 2: CRT TERMINAL
+       THEME 2: GRUVBOX DARK
        ========================================================================== */
-    body.theme-crt {
-        background-color: #050b05;
-        color: #00ff66;
-        font-family: "Courier New", Courier, monospace;
-        text-transform: uppercase;
-        text-shadow: 0 0 4px rgba(0, 255, 102, 0.6);
+    body.theme-gruvbox-dark {
+        background-color: #282828;
+        color: #ebdbb2;
+        font-family: monospace, "Courier New", Courier;
+        font-size: 13px;
     }
-    body.theme-crt::before {
-        content: " ";
-        display: block;
-        position: fixed;
-        top: 0; left: 0; bottom: 0; right: 0;
-        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-        background-size: 100% 4px;
-        z-index: 100;
-        pointer-events: none;
-    }
-    body.theme-crt .container {
+    body.theme-gruvbox-dark .container {
         max-width: 850px;
         margin: 0 auto;
     }
-    body.theme-crt h1 {
-        font-size: 1.4em;
-        color: #00ff66;
-        border: 2px dashed #00ff66;
-        padding: 10px;
-        text-align: center;
-        margin-top: 0;
-    }
-    body.theme-crt h2 {
-        font-size: 1.1em;
-        color: #00ff66;
-        border-bottom: 1px solid #00ff66;
+    body.theme-gruvbox-dark h1 {
+        color: #83a598;
+        border-bottom: 2px solid #504945;
         padding-bottom: 5px;
         margin-top: 0;
     }
-    body.theme-crt .section {
-        background-color: #0a150a;
-        border: 2px solid #00ff66;
+    body.theme-gruvbox-dark h2 {
+        color: #83a598;
+        border-bottom: 1px solid #504945;
+        padding-bottom: 4px;
+        margin-top: 0;
+    }
+    body.theme-gruvbox-dark .section {
+        background-color: #3c3836;
+        border: 1px solid #504945;
         padding: 15px;
-        margin-bottom: 20px;
-        box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+        margin-bottom: 18px;
     }
-    body.theme-crt label {
+    body.theme-gruvbox-dark label {
         display: block;
-        margin-top: 12px;
-        color: #33ff88;
+        margin-top: 10px;
+        color: #8ec07c;
+        font-weight: bold;
     }
-    body.theme-crt input[type="text"], body.theme-crt select {
+    body.theme-gruvbox-dark input[type="text"], body.theme-gruvbox-dark select {
         width: 100%;
-        padding: 8px;
-        margin-top: 5px;
-        background-color: #000000;
-        border: 1px solid #00ff66;
-        color: #00ff66;
-        font-family: "Courier New", Courier, monospace;
-        text-transform: uppercase;
-        outline: none;
+        padding: 6px;
+        margin-top: 4px;
+        background-color: #1d2021;
+        border: 1px solid #665c54;
+        color: #ebdbb2;
+        font-family: monospace;
     }
-    body.theme-crt input[type="text"]:focus, body.theme-crt select:focus {
-        box-shadow: 0 0 8px #00ff66;
+    body.theme-gruvbox-dark .radio-group {
+        margin-top: 6px;
     }
-    body.theme-crt .radio-group {
-        margin-top: 8px;
-    }
-    body.theme-crt .radio-option {
+    body.theme-gruvbox-dark .radio-option {
         display: block;
-        padding: 4px;
-        margin-bottom: 4px;
-        border: 1px dotted #008833;
-        color: #00ff66;
+        margin-bottom: 5px;
+        color: #fabd2f;
     }
-    body.theme-crt textarea {
+    body.theme-gruvbox-dark textarea {
         width: 100%;
         height: 160px;
-        background-color: #000000;
-        color: #00ff66;
-        border: 1px solid #00ff66;
+        background-color: #1d2021;
+        color: #fe8019;
+        border: 1px solid #665c54;
         padding: 8px;
-        font-family: "Courier New", Courier, monospace;
+        font-family: monospace;
         resize: vertical;
-        margin-top: 5px;
-        text-transform: none;
+        margin-top: 4px;
     }
-    body.theme-crt button {
-        background-color: #00ff66;
-        color: #000000;
+    body.theme-gruvbox-dark button {
+        background-color: #fe8019;
+        color: #282828;
         border: none;
-        padding: 8px 16px;
+        padding: 6px 14px;
         cursor: pointer;
         margin-top: 6px;
         margin-right: 4px;
-        font-family: "Courier New", Courier, monospace;
+        font-family: monospace;
         font-weight: bold;
-        text-transform: uppercase;
     }
-    body.theme-crt button:hover {
-        background-color: #ffffff;
-        box-shadow: 0 0 10px #ffffff;
+    body.theme-gruvbox-dark button:hover {
+        background-color: #83a598;
+        color: #282828;
     }
-    body.theme-crt .info-text {
-        color: #008833;
-        font-size: 0.85em;
+    body.theme-gruvbox-dark .info-text {
+        color: #a89984;
+        font-size: 0.9em;
     }
-    body.theme-crt ol, body.theme-crt ul {
+    body.theme-gruvbox-dark ol, body.theme-gruvbox-dark ul {
         padding-left: 20px;
-        color: #00ff66;
     }
-    body.theme-crt li {
+    body.theme-gruvbox-dark li {
         margin-bottom: 6px;
     }
-    body.theme-crt code {
-        background-color: #000000;
-        color: #00ff66;
+    body.theme-gruvbox-dark code {
+        background-color: #1d2021;
+        color: #d3869b;
         padding: 2px 5px;
-        border: 1px solid #00ff66;
-        text-transform: none;
+        border: 1px solid #504945;
     }
-    body.theme-crt a {
-        color: #00ff66;
+    body.theme-gruvbox-dark a {
+        color: #83a598;
     }
 
     /* ==========================================================================
@@ -471,19 +446,50 @@
     body.theme-win32 .column h1 {
         margin: 0 0 15px 0;
     }
+
+    /* Theme Switcher Buttons */
+    .theme-switcher {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    body[class*="theme-"] .theme-switcher label {
+        display: inline-block;
+        margin: 0 4px 0 0;
+    }
+    body[class*="theme-"] .theme-switcher button {
+        margin: 0;
+    }
+    body.theme-win32 .theme-btn.active {
+        border-color: #808080 #ffffff #ffffff #808080;
+        background-color: #dfdfdf;
+    }
+    body.theme-gruvbox-dark .theme-btn.active {
+        background-color: #83a598;
+        color: #282828;
+    }
+    body.theme-gruvbox .theme-btn.active {
+        background-color: #076678;
+        color: #fbf1c7;
+    }
+    body.theme-monokai .theme-btn.active {
+        background-color: #a6e22e;
+        color: #121212;
+    }
     </style>
 </head>
-<body class="theme-monokai">
+<body class="theme-gruvbox-dark">
 
 <div class="container">
     <div class="section" style="margin-bottom: 15px;">
-        <label for="themeSelect" style="margin-top: 0;">UI Theme (this is just for this site it doesn't change anything about the scripts :p):</label>
-        <select id="themeSelect" onchange="switchTheme(this.value)">
-            <option value="theme-win32">Win32 Classic</option>
-            <option value="theme-crt">CRT Terminal</option>
-            <option value="theme-gruvbox">Gruvbox Light</option>
-            <option value="theme-monokai" selected>Monokai Dark</option>
-        </select>
+        <div class="theme-switcher">
+            <label>UI Theme (this is just for this site it doesn't change anything about the scripts :p):</label>
+            <button type="button" class="theme-btn" data-theme="theme-win32" onclick="switchTheme('theme-win32')">Win32 Classic</button>
+            <button type="button" class="theme-btn active" data-theme="theme-gruvbox-dark" onclick="switchTheme('theme-gruvbox-dark')">Gruvbox Dark</button>
+            <button type="button" class="theme-btn" data-theme="theme-gruvbox" onclick="switchTheme('theme-gruvbox')">Gruvbox Light</button>
+            <button type="button" class="theme-btn" data-theme="theme-monokai" onclick="switchTheme('theme-monokai')">Monokai Dark</button>
+        </div>
     </div>
 
     <h1>Dual-Boot Reboot Script Generator</h1>
@@ -637,6 +643,13 @@
 <script>
 function switchTheme(themeClass) {
     document.body.className = themeClass;
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        if (btn.getAttribute('data-theme') === themeClass) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
 }
 
 function generate() {
