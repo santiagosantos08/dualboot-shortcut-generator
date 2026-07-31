@@ -668,7 +668,7 @@ function generate() {
     if (psIsPermanent) {
         psActionBlock = `if ($linuxGuid) {
     if ($linuxGuid -ne "{default}") {
-        bcdedit /default $linuxGuid
+        bcdedit /default '$linuxGuid'
     }
     shutdown /r /t 0
 } else {
@@ -677,7 +677,7 @@ function generate() {
 }`;
     } else {
         psActionBlock = `if ($linuxGuid) {
-    bcdedit /bootsequence $linuxGuid
+    bcdedit /bootsequence '$linuxGuid'
     shutdown /r /t 0
 } else {
     Write-Error "Linux entry '$targetDistro' not found in EFI boot manager. Aborting."
