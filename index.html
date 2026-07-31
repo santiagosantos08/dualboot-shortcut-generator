@@ -450,6 +450,27 @@
     body.theme-monokai a {
         color: #66d9ef;
     }
+
+    /* Columns layout & responsive overrides for Windows -> Linux and Linux -> Windows */
+    .columns-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    @media (min-width: 900px) {
+        body[class*="theme-"] .container {
+            max-width: 1600px;
+            width: 95%;
+        }
+        .columns-container {
+            grid-template-columns: 1fr 1fr;
+            align-items: start;
+            gap: 20px;
+        }
+    }
+    body.theme-win32 .column h1 {
+        margin: 0 0 15px 0;
+    }
     </style>
 </head>
 <body class="theme-monokai">
@@ -489,117 +510,123 @@
         </div>
     </div>
 
-    <h1>Windows -> Linux shortcut</h1>
-    <div class="section" style="border-left: 4px solid #f92672;">
-        <p>Before saving any scripts or icons, make sure to create the dedicated directory:</p>
-        <ul>
-            <li>Create <code>C:\scripts\linuxreboot</code></li>
-        </ul>
-    </div>
+    <div class="columns-container">
+        <div class="column">
+            <h1>Windows -> Linux shortcut</h1>
+            <div class="section" style="border-left: 4px solid #f92672;">
+                <p>Before saving any scripts or icons, make sure to create the dedicated directory:</p>
+                <ul>
+                    <li>Create <code>C:\scripts\linuxreboot</code></li>
+                </ul>
+            </div>
 
-    <div class="section">
-        <h2>1. Target Parameters</h2>
-        <label for="distroName">Linux BCD Description Field: (case sensitive!)</label>
-        <span class="info-text">Open PowerShell as admin, then run 'bcdedit /enum firmware' (without the quotes) and input JUST whatever is in the description field for your Linux entry (will be something like Fedora, Ubuntu, Grub, etc)</span>
-        <input type="text" id="distroName" value="Fedora" oninput="generate()">
-    </div>
+            <div class="section">
+                <h2>1. Target Parameters</h2>
+                <label for="distroName">Linux BCD Description Field: (case sensitive!)</label>
+                <span class="info-text">Open PowerShell as admin, then run 'bcdedit /enum firmware' (without the quotes) and input JUST whatever is in the description field for your Linux entry (will be something like Fedora, Ubuntu, Grub, etc)</span>
+                <input type="text" id="distroName" value="Fedora" oninput="generate()">
+            </div>
 
-    <div class="section">
-        <h2>2. Icon Resources & Tools</h2>
-        <ul>
-            <li>
-                <strong>Public Icon Repo:</strong> You can find clean vector/PNG logos for Linux distros at
-                <a href="https://simpleicons.org" target="_blank">simpleicons.org</a>.
-            </li>
-            <li>
-                <strong>Converting PNG/SVG to ICO:</strong> You can use any online converter or tool you like, just make sure you end up with an <code>.ico</code> file.
-            </li>
-            <li>
-                <strong>Save the <code>.ico</code> at: <code>C:\scripts\linuxreboot\whatever.ico</code></strong>
-            </li>
-        </ul>
-    </div>
+            <div class="section">
+                <h2>2. Icon Resources & Tools</h2>
+                <ul>
+                    <li>
+                        <strong>Public Icon Repo:</strong> You can find clean vector/PNG logos for Linux distros at
+                        <a href="https://simpleicons.org" target="_blank">simpleicons.org</a>.
+                    </li>
+                    <li>
+                        <strong>Converting PNG/SVG to ICO:</strong> You can use any online converter or tool you like, just make sure you end up with an <code>.ico</code> file.
+                    </li>
+                    <li>
+                        <strong>Save the <code>.ico</code> at: <code>C:\scripts\linuxreboot\whatever.ico</code></strong>
+                    </li>
+                </ul>
+            </div>
 
-    <div class="section">
-        <h2>3. Generated Scripts</h2>
+            <div class="section">
+                <h2>3. Generated Scripts</h2>
 
-        <label>linux_reboot.ps1 (Save at <code>C:\scripts\linuxreboot\linux_reboot.ps1</code>):</label>
-        <textarea id="outPs1" readonly></textarea>
-        <button onclick="copyToClipboard('outPs1')">Copy PowerShell Script</button>
-        <button onclick="downloadFile('outPs1', 'linux_reboot.ps1')">Download linux_reboot.ps1</button>
+                <label>linux_reboot.ps1 (Save at <code>C:\scripts\linuxreboot\linux_reboot.ps1</code>):</label>
+                <textarea id="outPs1" readonly></textarea>
+                <button onclick="copyToClipboard('outPs1')">Copy PowerShell Script</button>
+                <button onclick="downloadFile('outPs1', 'linux_reboot.ps1')">Download linux_reboot.ps1</button>
 
-    </div>
+            </div>
 
-    <div class="section">
-        <h2>4. Final Setup Instructions</h2>
-        <ol>
-            <li>Save the files in the locations specified in each step.</li>
-            <li>Right-click <code>linux_reboot.ps1</code> and select <strong>Send to -&gt; Desktop (create shortcut)</strong>.</li>
-            <li>Right-click the new shortcut on your Desktop and open <strong>Properties</strong>.</li>
-            <li>Change the <strong>Target</strong> to:
-                <code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -ExecutionPolicy Bypass -File "C:\scripts\linuxreboot\linux_reboot.ps1"</code>
-            </li>
-            <li>Click <strong>Advanced...</strong> and check the box for <strong>Run as administrator</strong>.</li>
-            <li>Click <strong>Change Icon...</strong> and browse to select your <code>.ico</code> file.</li>
-            <li>(optional) Move the shortcut to <code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</code> so it appears in your Start Menu.</li>
-        </ol>
+            <div class="section">
+                <h2>4. Final Setup Instructions</h2>
+                <ol>
+                    <li>Save the files in the locations specified in each step.</li>
+                    <li>Right-click <code>linux_reboot.ps1</code> and select <strong>Send to -&gt; Desktop (create shortcut)</strong>.</li>
+                    <li>Right-click the new shortcut on your Desktop and open <strong>Properties</strong>.</li>
+                    <li>Change the <strong>Target</strong> to:
+                        <code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -ExecutionPolicy Bypass -File "C:\scripts\linuxreboot\linux_reboot.ps1"</code>
+                    </li>
+                    <li>Click <strong>Advanced...</strong> and check the box for <strong>Run as administrator</strong>.</li>
+                    <li>Click <strong>Change Icon...</strong> and browse to select your <code>.ico</code> file.</li>
+                    <li>(optional) Move the shortcut to <code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</code> so it appears in your Start Menu.</li>
+                </ol>
 
-    </div>
+            </div>
+        </div>
 
-    <h1>Linux -> Windows shortcut</h1>
-    <div class="section" style="border-left: 4px solid #f92672;">
-        <p>Before saving any scripts or icons, make sure to create the dedicated directory:</p>
-        <ul>
-            <li>Create <code>~/scripts/winreboot</code> (<code>/home/YOUR_USERNAME/scripts/winreboot</code>).</li>
+        <div class="column">
+            <h1>Linux -> Windows shortcut</h1>
+            <div class="section" style="border-left: 4px solid #f92672;">
+                <p>Before saving any scripts or icons, make sure to create the dedicated directory:</p>
+                <ul>
+                    <li>Create <code>~/scripts/winreboot</code> (<code>/home/YOUR_USERNAME/scripts/winreboot</code>).</li>
 
-        </ul>
-        <p>(If you are super new to Linux, <code>~</code> means <code>/home/YOUR_USERNAME</code>).</p>
-    </div>
+                </ul>
+                <p>(If you are super new to Linux, <code>~</code> means <code>/home/YOUR_USERNAME</code>).</p>
+            </div>
 
 
-    <div class="section">
-        <h2>1. Target Parameters</h2>
-        <label for="linuxUsername">Linux username: (case sensitive!)</label>
-        <span class="info-text">If you are not sure of this, open a terminal and run 'whoami' (without the quotes)</span>
-        <input type="text" id="linuxUsername" value="yourusername" oninput="generate()">
-    </div>
+            <div class="section">
+                <h2>1. Target Parameters</h2>
+                <label for="linuxUsername">Linux username: (case sensitive!)</label>
+                <span class="info-text">If you are not sure of this, open a terminal and run 'whoami' (without the quotes)</span>
+                <input type="text" id="linuxUsername" value="yourusername" oninput="generate()">
+            </div>
 
-    <div class="section">
-        <h2>2. Icon</h2>
-        <ul>
-            <li>
-                <strong>Windows PNG Icon Direct Download (Save at <code>~/scripts/winreboot/win11.png</code>):</strong>
-                <br>
-                <button type="button" onclick="downloadImage('win11.png', 'win11.png')">Download win11.png</button>
-            </li>
-        </ul>
-    </div>
+            <div class="section">
+                <h2>2. Icon</h2>
+                <ul>
+                    <li>
+                        <strong>Windows PNG Icon Direct Download (Save at <code>~/scripts/winreboot/win11.png</code>):</strong>
+                        <br>
+                        <button type="button" onclick="downloadImage('win11.png', 'win11.png')">Download win11.png</button>
+                    </li>
+                </ul>
+            </div>
 
-    <div class="section">
-        <h2>3. Generated Scripts</h2>
-        <label>windows_reboot.sh (Save at <code>~/scripts/winreboot/windows_reboot.sh</code>):</label>
-        <textarea id="outSh" readonly></textarea>
-        <button onclick="copyToClipboard('outSh')">Copy Bash Script</button>
-        <button onclick="downloadFile('outSh', 'windows_reboot.sh')">Download windows_reboot.sh</button>
+            <div class="section">
+                <h2>3. Generated Scripts</h2>
+                <label>windows_reboot.sh (Save at <code>~/scripts/winreboot/windows_reboot.sh</code>):</label>
+                <textarea id="outSh" readonly></textarea>
+                <button onclick="copyToClipboard('outSh')">Copy Bash Script</button>
+                <button onclick="downloadFile('outSh', 'windows_reboot.sh')">Download windows_reboot.sh</button>
 
-        <br><br>
+                <br><br>
 
-        <label>windows_reboot.desktop (Save at <code>~/.local/share/applications/windows_reboot.desktop</code>):</label>
-        <textarea id="outDesktop" readonly></textarea>
-        <button onclick="copyToClipboard('outDesktop')">Copy Desktop Entry</button>
-        <button onclick="downloadFile('outDesktop', 'windows_reboot.desktop')">Download windows_reboot.desktop</button>
-    </div>
+                <label>windows_reboot.desktop (Save at <code>~/.local/share/applications/windows_reboot.desktop</code>):</label>
+                <textarea id="outDesktop" readonly></textarea>
+                <button onclick="copyToClipboard('outDesktop')">Copy Desktop Entry</button>
+                <button onclick="downloadFile('outDesktop', 'windows_reboot.desktop')">Download windows_reboot.desktop</button>
+            </div>
 
-    <div class="section">
-        <h2>4. Final Setup Instructions</h2>
-        <ol>
-            <li>Save the files in the locations specified in each step.</li>
-            <li>Make the script executable by running:
-                <br>
-                <code>chmod +x ~/scripts/winreboot/windows_reboot.sh</code>
-            </li>
-            <li>(optional) If the application icon does not show up immediately in your application menu, log out and log back in.</li>
-        </ol>
+            <div class="section">
+                <h2>4. Final Setup Instructions</h2>
+                <ol>
+                    <li>Save the files in the locations specified in each step.</li>
+                    <li>Make the script executable by running:
+                        <br>
+                        <code>chmod +x ~/scripts/winreboot/windows_reboot.sh</code>
+                    </li>
+                    <li>(optional) If the application icon does not show up immediately in your application menu, log out and log back in.</li>
+                </ol>
+            </div>
+        </div>
     </div>
     <div class="section" style="border-left: 4px solid #f92672;">
         <strong>Questions? ideas? anything? open an issue</strong>
